@@ -235,7 +235,7 @@
             const img = canvas.toDataURL('image/png');
             const blob = await (await fetch(img)).blob();
             const file = new File([blob], 'NityamShare.png', { type: 'image/png' });
-            const msg = `🚩 *નિત્યમ્ સંસ્કાર: ${name}* 🚩\n📅 ${date}\n📞 ૯૦૯૯૦૨૫૮૦૧\n\nBranding by: *DHARMRAKSHAK*`;
+            const msg = `🚩 *નિત્યમ્ સંસ્કાર: ${name}* 🚩\n📅 ${date}\n📞 ૯૦૯૯૦૨૫૮૦૧\n\nBranding by: *DHARMRAKSHAK* \n જોડવો : https://hardipsinh.github.io/camp/`;
             if (navigator.share) await navigator.share({ files: [file], title: 'નિત્યમ્ સંસ્કાર', text: msg });
         }
 
@@ -267,14 +267,14 @@
             ctx.fillText(`બાળક: ${data.name}`, 120, 510);
             ctx.fillText(`ઉમર: ${data.age} વર્ષ`, 120, 580);
             ctx.fillText(`બેચ: ${data.batch}`, 120, 650);
-            ctx.fillText(`નંબર: ${data.wa}`,120,650);
+            ctx.fillText(`નંબર: ${data.wa}`,120,720);
             ctx.fillStyle = '#FF8C00'; ctx.font = 'bold 22px "Hind Vadodara"';
-            ctx.fillText(`ID: NY-${Math.floor(Math.random()*900)+100}`, 120, 710);
+            ctx.fillText(`ID: NY-${Math.floor(Math.random()*900)+100}`, 120, 810);
             document.getElementById('id-share-btn').onclick = async () => {
                 const img = canvas.toDataURL('image/png');
                 const blob = await (await fetch(img)).blob();
                 const file = new File([blob], 'NityamID.png', { type: 'image/png' });
-                const txt = `🚩 *નિત્યમ્ સંસ્કાર એડમિશન* 🚩\n\nબાળક: *${data.name}*\nબેચ: *${data.batch}*\n\n📞 વધુ વિગત: ૯૦૯૯૦૨૫૮૦૧\n\nBranding by: *DHARMRAKSHAK*`;
+                const txt = `🚩 *નિત્યમ્ સંસ્કાર એડમિશન* 🚩\n\nબાળક: *${data.name}*\nબેચ: *${data.batch}*\n\n📞 વધુ વિગત: ૯૦૯૯૦૨૫૮૦૧\n\n https://hardipsinh.github.io/camp/ \n Branding by: *DHARMRAKSHAK*`;
                 if (navigator.share) await navigator.share({ files: [file], title: 'નિત્યમ્ સંસ્કાર', text: txt });
             };
         }
