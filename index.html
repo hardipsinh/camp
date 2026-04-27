@@ -1,0 +1,297 @@
+
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>નિત્યમ્ સંસ્કાર | Final Live Edition</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Hind+Vadodara:wght@300;400;500;600;700&family=Laila:wght@700&display=swap" rel="stylesheet">
+    <style>
+        :root { --brand-red: #8B0000; --brand-saffron: #FF8C00; --bg-cream: #FFFEF9; }
+        body { font-family: 'Hind Vadodara', sans-serif; background-color: var(--bg-cream); scroll-behavior: smooth; }
+        .heading-font { font-family: 'Laila', serif; }
+        .saffron-gradient { background: linear-gradient(135deg, #8B0000 0%, #FF4500 100%); }
+        
+        .glass-card { background: white; border-radius: 28px; border: 1px solid rgba(0,0,0,0.05); box-shadow: 0 10px 30px rgba(0,0,0,0.03); transition: all 0.3s ease; }
+        .upcoming-card { background: #FFF9F2; border-left: 6px solid #FF8C00; border-radius: 24px; position: relative; overflow: hidden; }
+
+        .hub-menu { transform: scale(0); opacity: 0; transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); pointer-events: none; transform-origin: bottom right; }
+        .hub-open .hub-menu { transform: scale(1); opacity: 1; pointer-events: auto; }
+        
+        .watermark { position: absolute; bottom: 10px; right: 20px; font-size: 10px; font-weight: 900; color: rgba(0,0,0,0.04); letter-spacing: 2px; pointer-events: none; text-transform: uppercase; }
+        .video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 30px; box-shadow: 0 20px 50px rgba(0,0,0,0.15); }
+        .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
+        
+        #share-canvas { display: none; }
+    </style>
+</head>
+<body class="pb-28">
+
+    <!-- Spiritual Strip -->
+    <div class="bg-black text-yellow-500 py-2 text-center text-[10px] font-bold tracking-[0.4em] uppercase">
+        ॥ શ્રી ગણેશાય નમઃ ॥ ૐ ॥ ધર્મો રક્ષતિ રક્ષિતઃ ॥
+    </div>
+
+    <!-- Header -->
+    <header class="saffron-gradient text-white pt-16 pb-32 px-6 text-center relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10 pointer-events-none flex items-center justify-center">
+            <i class="fa-solid fa-om text-[320px]"></i>
+        </div>
+        <div class="max-w-2xl mx-auto relative z-10">
+            <h1 class="heading-font text-5xl md:text-7xl font-bold mb-4 drop-shadow-2xl">નિત્યમ્ સંસ્કાર</h1>
+            <div class="inline-block bg-white/10 backdrop-blur-md px-8 py-2 rounded-full border border-white/20 mb-6 shadow-lg">
+                <p class="text-sm md:text-lg font-bold tracking-widest text-yellow-200 uppercase">નિઃશુલ્ક ગુરુકુલમ્ સમર કેમ્પ ૨૦૨૬</p>
+            </div>
+            <p class="text-white/90 italic text-sm font-medium tracking-wide">બાળકોમાં ભારતીય સંસ્કારોના પવિત્ર સિંચનનું દિવ્ય કેન્દ્ર</p>
+        </div>
+    </header>
+
+    <main class="max-w-xl mx-auto px-6 -mt-16 relative z-20">
+        
+        <!-- Video Preview -->
+        <section class="mb-12">
+            <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" title="Nityam Sanskar" allowfullscreen></iframe>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="mb-12">
+            <h2 class="heading-font text-3xl font-bold text-red-950 mb-8 border-l-8 border-orange-600 pl-4 uppercase">કેમ્પની વિગતો</h2>
+            <div id="features-list" class="space-y-4"></div>
+        </section>
+
+        <!-- Upcoming Batches -->
+        <section class="mb-12">
+            <h2 class="heading-font text-3xl font-bold text-red-950 mb-8 border-l-8 border-orange-600 pl-4 uppercase">આગામી ઇવેન્ટ્સ</h2>
+            <div id="batch-container" class="space-y-4"></div>
+        </section>
+
+        <!-- Registration -->
+        <section id="registration" class="mb-12 scroll-mt-24">
+            <div class="bg-slate-950 rounded-[2.5rem] p-8 text-white relative overflow-hidden shadow-2xl border-b-8 border-orange-600">
+                <div class="relative z-10">
+                    <h3 class="heading-font text-3xl font-bold mb-2">એડમિશન ફોર્મ</h3>
+                    <p class="text-slate-400 text-xs mb-8 italic">ઓનલાઇન રજીસ્ટ્રેશન કરી તમારું કાર્ડ મેળવો.</p>
+                    
+                    <form id="final-reg-form" class="space-y-4">
+                        <div class="space-y-1">
+                            <label class="text-[10px] font-bold text-slate-500 uppercase ml-2">કેમ્પ બેચ પસંદ કરો</label>
+                            <select id="f_batch" class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 outline-none text-white focus:bg-white/10 transition appearance-none">
+                                <option value="૧લી બેચ" class="bg-slate-900">૧લી બેચ (૨૭/૦૪ થી ૦૨/૦૫)</option>
+                                <option value="૨જી બેચ" class="bg-slate-900">૨જી બેચ (૦૪/૦૫ થી ૦૯/૦૫)</option>
+                                <option value="૩જી બેચ" class="bg-slate-900">૩જી બેચ (૧૧/૦૫ થી ૧૬/૦૫)</option>
+                            </select>
+                        </div>
+                        <input type="text" id="f_name" placeholder="બાળકનું પૂરું નામ" required class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 outline-none text-white focus:bg-white/10">
+                        <div class="grid grid-cols-2 gap-4">
+                            <input type="number" id="f_age" placeholder="ઉમર" required class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 outline-none text-white">
+                            <input type="tel" id="f_wa" placeholder="WhatsApp Number" required class="w-full bg-white/5 border border-white/10 rounded-2xl py-4 px-6 outline-none text-white">
+                        </div>
+                        <button type="submit" class="w-full bg-orange-600 text-white font-bold py-5 rounded-2xl shadow-xl hover:bg-orange-700 transition transform active:scale-95 flex items-center justify-center gap-3">
+                            રજીસ્ટ્રેશન કન્ફર્મ કરો
+                        </button>
+                    </form>
+
+                    <div id="success-area" class="hidden text-center py-6">
+                        <div class="w-20 h-20 bg-green-500 rounded-full flex items-center justify-center mx-auto mb-6 text-3xl shadow-lg animate-bounce">
+                            <i class="fa-solid fa-check"></i>
+                        </div>
+                        <h4 class="text-2xl font-bold mb-6">સફળ રજીસ્ટ્રેશન!</h4>
+                        <button id="id-share-btn" class="bg-green-600 w-full text-white font-bold py-5 rounded-2xl flex items-center justify-center gap-3 shadow-lg hover:bg-green-700 transition">
+                            <i class="fa-solid fa-share-nodes"></i> કાર્ડ શેર કરો
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Location -->
+        <section class="mb-12">
+            <div class="glass-card p-8 text-center relative overflow-hidden border-t-4 border-red-900">
+                <div class="watermark">Dharmrakshak</div>
+                <div class="w-16 h-16 bg-red-50 text-red-600 rounded-3xl flex items-center justify-center mx-auto mb-4 rotate-3">
+                    <i class="fa-solid fa-location-dot text-2xl"></i>
+                </div>
+                <h4 class="heading-font text-2xl font-bold text-red-950 mb-2">કેમ્પનું સ્થળ</h4>
+                <p class="text-slate-600 font-medium mb-8 leading-relaxed">
+                    નિત્યમ પાર્ટી પ્લોટ, હોટેલ સ્વાગત સામે,<br>રાંધેજા બસ સ્ટેન્ડ પાસે, ગાંધીનગર.
+                </p>
+                <a href="https://maps.google.com/?q=Nityam+Party+Plot+Randheja" target="_blank" class="flex items-center justify-center gap-3 bg-slate-900 text-white px-8 py-5 rounded-2xl font-bold shadow-lg w-full hover:bg-black transition">
+                    ગૂગલ મેપ નેવિગેશન
+                </a>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer class="text-center py-16 border-t border-orange-50">
+            <p class="text-[10px] font-black text-slate-300 tracking-[0.6em] uppercase mb-4">Architecture & Branding</p>
+            <h4 class="heading-font text-4xl text-red-950 font-bold tracking-tighter mb-1">DHARMRAKSHAK</h4>
+            <p class="text-slate-500 font-bold text-xl tracking-widest uppercase">Hardipsinh Jadeja</p>
+            <p class="text-[10px] text-slate-400 mt-8 font-black tracking-widest uppercase">© ૨૦૨૬ ALL RIGHTS RESERVED.</p>
+        </footer>
+
+    </main>
+
+    <!-- Floating Action Hub -->
+    <div id="float-hub" class="fixed bottom-6 right-6 z-[1000]">
+        <div class="hub-menu absolute bottom-20 right-0 space-y-4 flex flex-col items-end">
+            <a href="tel:+919099025801" class="flex items-center gap-4 bg-white px-6 py-4 rounded-3xl shadow-2xl border border-slate-50 transition hover:bg-orange-50 group">
+                <span class="text-xs font-black text-slate-700 uppercase group-hover:text-orange-600">આયોજકનો સંપર્ક</span>
+                <div class="w-10 h-10 bg-orange-600 text-white rounded-xl flex items-center justify-center">
+                    <i class="fa-solid fa-phone"></i>
+                </div>
+            </a>
+            <a href="https://maps.google.com/?q=Nityam+Party+Plot+Randheja" target="_blank" class="flex items-center gap-4 bg-white px-6 py-4 rounded-3xl shadow-2xl border border-slate-50 transition hover:bg-red-50 group">
+                <span class="text-xs font-black text-slate-700 uppercase group-hover:text-red-600">કેમ્પનું સ્થાન</span>
+                <div class="w-10 h-10 bg-red-600 text-white rounded-xl flex items-center justify-center">
+                    <i class="fa-solid fa-location-arrow"></i>
+                </div>
+            </a>
+        </div>
+        <button onclick="document.getElementById('float-hub').classList.toggle('hub-open')" class="w-16 h-16 saffron-gradient text-white rounded-[20px] shadow-2xl flex items-center justify-center text-3xl transition active:scale-90 hover:rotate-12">
+            <i class="fa-solid fa-hands-praying"></i>
+            <span class="absolute -top-1 -right-1 flex h-4 w-4">
+                <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-white opacity-75"></span>
+                <span class="relative inline-flex rounded-full h-4 w-4 bg-yellow-400 border border-orange-600"></span>
+            </span>
+        </button>
+    </div>
+
+    <!-- Share Canvas -->
+    <canvas id="share-canvas" width="600" height="1000"></canvas>
+
+    <script>
+        const config = {
+            features: [
+                { t: "સંસ્કૃતિ અને પ્રકૃતિ", i: "મંત્ર, યોગ, પ્રાણાયામ, વૃક્ષારોપણ અને પક્ષીદર્શન.", c: "#f97316", ic: "fa-seedling" },
+                { t: "શાસ્ત્ર અને શસ્ત્ર", i: "શ્રીમદ્દ ભાગવત ગીતા અને વીર ગાથાનું શિક્ષણ.", c: "#dc2626", ic: "fa-khanda" },
+                { t: "વૈદિક વારસો અને વિજ્ઞાન", i: "યજ્ઞ પરંપરા અને પ્રાચીન વિજ્ઞાનનો પરિચય.", c: "#ea580c", ic: "fa-fire-alt" },
+                { t: "અધ્યાત્મ અને આયુર્વેદ", i: "ઋષિમુનિ દર્શન તથા ઉપયોગી વનસ્પતિ જ્ઞાન.", c: "#16a34a", ic: "fa-leaf" },
+                { t: "વૈદિક દિનચર્યા", i: "ગૌ-શિક્ષણ, સંસ્કૃત અને આદર્શ જીવનશૈલી.", c: "#d97706", ic: "fa-cow" },
+                { t: "વિસરાયેલ રમત", i: "બાળકો માટે ભુલાઈ ગયેલી પ્રાચીન રમતો.", c: "#7c3aed", ic: "fa-chess-rook" },
+                { t: "પૌષ્ટિક નાસ્તો", i: "દરરોજ શુદ્ધ અને સાત્વિક આહારની વ્યવસ્થા.", c: "#ca8a04", ic: "fa-bowl-food" }
+            ],
+            batches: [
+                { name: "૨જી બેચ", date: "૦૪/૦૫ થી ૦૯/૦૫", status: "Open" },
+                { name: "૩જી બેચ", date: "૧૧/૦૫ થી ૧૬/૦૫", status: "Soon" }
+            ]
+        };
+
+        function init() {
+            // Features
+            document.getElementById('features-list').innerHTML = config.features.map(f => `
+                <div class="glass-card p-5 flex items-center gap-5 relative overflow-hidden">
+                    <div class="watermark">Dharmrakshak</div>
+                    <div class="w-14 h-14 rounded-2xl flex items-center justify-center flex-shrink-0" style="background: ${f.c}15; color: ${f.c}">
+                        <i class="fa-solid ${f.ic} text-2xl"></i>
+                    </div>
+                    <div>
+                        <h4 class="font-bold text-slate-800 text-base mb-1">${f.t}</h4>
+                        <p class="text-[11px] text-slate-500 font-medium">${f.i}</p>
+                    </div>
+                </div>
+            `).join('');
+
+            // Batches
+            document.getElementById('batch-container').innerHTML = config.batches.map(b => `
+                <div class="upcoming-card p-6">
+                    <div class="watermark">Dharmrakshak</div>
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="${b.status === 'Open' ? 'bg-orange-600' : 'bg-slate-500'} text-white text-[10px] px-3 py-1 rounded-full font-bold uppercase shadow-sm">${b.status === 'Open' ? 'રજીસ્ટ્રેશન ચાલુ' : 'ટૂંક સમયમાં'}</span>
+                        <button onclick="shareMaster('${b.name}', '${b.date}')" class="text-orange-600 hover:scale-125 transition-transform"><i class="fa-solid fa-share-nodes text-2xl"></i></button>
+                    </div>
+                    <h4 class="font-bold text-xl text-slate-800">${b.name} (Summer Camp)</h4>
+                    <p class="text-xs text-orange-700 font-bold mt-1 uppercase tracking-wider">તારીખ: ${b.date}</p>
+                </div>
+            `).join('');
+        }
+
+        async function shareMaster(name, date) {
+            const canvas = document.getElementById('share-canvas');
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#8B0000'; ctx.fillRect(0, 0, 600, 1000);
+            ctx.fillStyle = '#FFFFFF'; ctx.beginPath(); ctx.roundRect(25, 25, 550, 950, 45); ctx.fill();
+            ctx.fillStyle = '#FF8C00'; ctx.beginPath(); ctx.roundRect(25, 25, 550, 220, {tl:45, tr:45, bl:0, br:0}); ctx.fill();
+            ctx.textAlign = 'center'; ctx.fillStyle = '#FFFFFF';
+            ctx.font = 'bold 50px "Hind Vadodara"'; ctx.fillText('નિત્યમ્ સંસ્કાર', 300, 115);
+            ctx.font = 'bold 22px "Hind Vadodara"'; ctx.fillText('નિઃશુલ્ક ગુરુકુલમ્ સમર કેમ્પ ૨૦૨૬', 300, 180);
+            ctx.fillStyle = '#8B0000'; ctx.font = 'bold 34px "Hind Vadodara"'; ctx.fillText(`🚩 ${name} 🚩`, 300, 310);
+            ctx.fillStyle = '#FF8C00'; ctx.font = 'bold 24px "Hind Vadodara"'; ctx.fillText(`તારીખ: ${date}`, 300, 360);
+            ctx.fillStyle = '#FFF9F2'; ctx.beginPath(); ctx.roundRect(60, 410, 480, 430, 35); ctx.fill();
+            ctx.textAlign = 'left'; ctx.fillStyle = '#2D3436'; ctx.font = 'bold 24px "Hind Vadodara"';
+            ctx.fillText('કેમ્પની લાક્ષણિકતાઓ:', 95, 465);
+            config.features.forEach((f, i) => {
+                ctx.font = 'normal 19px "Hind Vadodara"'; ctx.fillStyle = '#475569';
+                ctx.fillText(`• ${f.t}`, 100, 520 + (i * 45));
+            });
+            ctx.textAlign = 'center'; ctx.fillStyle = '#64748B'; ctx.font = 'bold 20px "Hind Vadodara"';
+            ctx.fillText('સ્થળ: રાંધેજા, ગાંધીનગર | મો: ૯૦૯૯૦ ૨૫૮૦૧', 300, 890);
+            ctx.fillStyle = '#cbd5e1'; ctx.font = 'bold 12px "Hind Vadodara"';
+            ctx.fillText('ARCHITECTED BY: DHARMRAKSHAK', 300, 955);
+
+            const img = canvas.toDataURL('image/png');
+            const blob = await (await fetch(img)).blob();
+            const file = new File([blob], 'NityamShare.png', { type: 'image/png' });
+            const msg = `🚩 *નિત્યમ્ સંસ્કાર: ${name}* 🚩\n📅 ${date}\n📞 ૯૦૯૯૦૨૫૮૦૧\n\nBranding by: *DHARMRAKSHAK*`;
+            if (navigator.share) await navigator.share({ files: [file], title: 'નિત્યમ્ સંસ્કાર', text: msg });
+        }
+
+        document.getElementById('final-reg-form').onsubmit = async (e) => {
+            e.preventDefault();
+            const data = {
+                name: document.getElementById('f_name').value,
+                age: document.getElementById('f_age').value,
+                wa: document.getElementById('f_wa').value,
+                batch: document.getElementById('f_batch').value
+            };
+            await createID(data);
+            document.getElementById('final-reg-form').classList.add('hidden');
+            document.getElementById('success-area').classList.remove('hidden');
+        };
+
+        async function createID(data) {
+            const canvas = document.getElementById('share-canvas');
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#0F172A'; ctx.fillRect(0, 0, 600, 1000);
+            ctx.fillStyle = '#FFFFFF'; ctx.beginPath(); ctx.roundRect(30, 30, 540, 940, 45); ctx.fill();
+            ctx.fillStyle = '#8B0000'; ctx.beginPath(); ctx.roundRect(30, 30, 540, 220, {tl:45, tr:45, bl:0, br:0}); ctx.fill();
+            ctx.textAlign = 'center'; ctx.fillStyle = '#FFFFFF';
+            ctx.font = 'bold 48px "Hind Vadodara"'; ctx.fillText('નિત્યમ્ સંસ્કાર', 300, 120);
+            ctx.font = 'bold 22px "Hind Vadodara"'; ctx.fillText('એડમિશન કાર્ડ ૨૦૨૬', 300, 185);
+            ctx.fillStyle = '#8B0000'; ctx.font = 'bold 34px "Hind Vadodara"'; ctx.fillText('◆ રજીસ્ટ્રેશન કન્ફર્મ ◆', 300, 340);
+            ctx.fillStyle = '#F8FAFC'; ctx.beginPath(); ctx.roundRect(80, 420, 440, 320, 30); ctx.fill();
+            ctx.textAlign = 'left'; ctx.fillStyle = '#1E293B'; ctx.font = 'bold 28px "Hind Vadodara"';
+            ctx.fillText(`બાળક: ${data.name}`, 120, 510);
+            ctx.fillText(`ઉમર: ${data.age} વર્ષ`, 120, 580);
+            ctx.fillText(`બેચ: ${data.batch}`, 120, 650);
+            ctx.fillStyle = '#FF8C00'; ctx.font = 'bold 22px "Hind Vadodara"';
+            ctx.fillText(`ID: NY-${Math.floor(Math.random()*900)+100}`, 120, 710);
+            document.getElementById('id-share-btn').onclick = async () => {
+                const img = canvas.toDataURL('image/png');
+                const blob = await (await fetch(img)).blob();
+                const file = new File([blob], 'NityamID.png', { type: 'image/png' });
+                const txt = `🚩 *નિત્યમ્ સંસ્કાર એડમિશન* 🚩\n\nબાળક: *${data.name}*\nબેચ: *${data.batch}*\n\n📞 વધુ વિગત: ૯૦૯૯૦૨૫૮૦૧\n\nBranding by: *DHARMRAKSHAK*`;
+                if (navigator.share) await navigator.share({ files: [file], title: 'નિત્યમ્ સંસ્કાર', text: txt });
+            };
+        }
+
+        if (!CanvasRenderingContext2D.prototype.roundRect) {
+            CanvasRenderingContext2D.prototype.roundRect = function (x, y, w, h, r) {
+                if (typeof r === 'number') r = {tl: r, tr: r, bl: r, br: r};
+                this.beginPath(); this.moveTo(x + r.tl, y);
+                this.lineTo(x + w - r.tr, y); this.quadraticCurveTo(x + w, y, x + w, y + r.tr);
+                this.lineTo(x + w, y + h - r.br); this.quadraticCurveTo(x + w, y + h, x + w - r.br, y + h);
+                this.lineTo(x + r.bl, y + h); this.quadraticCurveTo(x, y + h, x, y + h - r.bl);
+                this.lineTo(x, y + r.tl); this.quadraticCurveTo(x, y, x + r.tl, y);
+                this.closePath(); return this;
+            };
+        }
+        window.onload = init;
+    </script>
+</body>
+</html>
+
+
