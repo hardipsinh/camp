@@ -269,7 +269,12 @@
             ctx.fillText(`બેચ: ${data.batch}`, 120, 650);
             ctx.fillText(`નંબર: ${data.wa}`,120,720);
             ctx.fillStyle = '#FF8C00'; ctx.font = 'bold 22px "Hind Vadodara"';
-            ctx.fillText(`ID: NY-${Math.floor(Math.random()*900)+100}`, 120, 810);
+
+            // Generates a 10-digit incremental number based on seconds
+            const shortID = Math.floor(Date.now() / 1000); 
+            ctx.fillText(`ID: NY-${shortID}`, 120, 810);
+
+            //ctx.fillText(`ID: NY-${Math.floor(Math.random()*900)+100}`, 120, 810);
             document.getElementById('id-share-btn').onclick = async () => {
                 const img = canvas.toDataURL('image/png');
                 const blob = await (await fetch(img)).blob();
