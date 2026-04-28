@@ -1,4 +1,4 @@
-re
+
 <!DOCTYPE html>
 <html lang="gu">
 <head>
@@ -25,6 +25,38 @@ re
         .video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: 0; }
         
         #share-canvas { display: none; }
+
+
+       /* Contact Link Styling (Phone & WhatsApp) */
+        .contact-link {
+            color: #721414; /* Default text color */
+            transition: color 0.2s;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .contact-link:hover {
+            color: #9A6324; /* Change on hover */
+            text-decoration: underline;
+        }
+        .whatsapp-icon {
+            color: #25D366; /* WhatsApp Green */
+        }
+
+        /* NEW STYLE: Center alignment for contact numbers */
+        .contact-center-align {
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Center items horizontally */
+            text-align: center; /* Center text within the container */
+            gap: 0.75rem; /* Space between rows */
+        }
+        .contact-row {
+            display: flex;
+            justify-content: center; /* Center the links within the row */
+            flex-wrap: wrap; /* Allow wrapping on small screens */
+            gap: 1.5rem; /* Space between phone/whatsapp pairs */
+        }
+        
     </style>
 </head>
 <body class="pb-28">
@@ -127,7 +159,7 @@ re
 
 
 
-<div class="separator mx-auto w-1/3"></div>
+           <div class="separator mx-auto w-1/3"></div>
             
             <!-- Contact Details (UPDATED WITH WHATSAPP LINKS & CENTER ALIGNMENT) -->
             <div class="mb-4">
@@ -155,7 +187,7 @@ re
                         <!-- Contact 2 -->
                         <div class="flex items-center space-x-2">
                             <a href="tel:+919429438027" class="contact-link flex items-center">
-                                9429438027
+                                ૯૪૨૯૪ ૩૮૦૨૭
                                 <i data-lucide="phone-call" class="w-4 h-4 ml-1 text-secondary"></i>
                             </a>
                             <!-- WhatsApp Link -->
@@ -171,7 +203,7 @@ re
                 <p class="text-xs text-gray-500 mt-3 gu-text italic">
                     (ફોન આઇકન પર ક્લિક કરવાથી ડાયલ પેડ અને WhatsApp આઇકન પર ક્લિક કરવાથી મેસેજ બોક્સ ખુલશે.)
                 </p>
-                <div id="hitCount"></div>
+                
             </div>
         </div>
       
